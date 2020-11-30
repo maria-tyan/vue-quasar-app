@@ -4,6 +4,7 @@
       v-for="store in stores"
       :key="store.code"
       class="stores-block__item"
+      @click="openModal(store)"
     >
       {{ store.name }}
     </div>
@@ -28,6 +29,17 @@ export default {
       } catch (error) {
         console.error(error)
       }
+    },
+    openModal (store) {
+      this.$q.dialog({
+        title: store.name,
+        message: `<b>Store Type: </b>${store.storeType} <br />
+          <b>Email: </b>${store.storeEmail} <br />
+          <b>Phone: </b>${store.storePhone} <br />
+          <b>Address: </b>${store.address} <br />`,
+        persistent: true,
+        html: true
+      })
     }
   }
 }
