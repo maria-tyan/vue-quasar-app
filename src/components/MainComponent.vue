@@ -1,7 +1,7 @@
 <template>
   <div class="stores-block">
     <div
-      v-for="store in stores"
+      v-for="store in allStores"
       :key="store.code"
       class="stores-block__item"
       @click="openModal(store)"
@@ -12,24 +12,21 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
-  data () {
-    return {
-      stores: []
-    }
-  },
-  async created () {
+  async mounted () {
     await this.fetchData()
   },
+  computed: {
+    ...mapGetters({
+      allStores: 'stores/allStores'
+    })
+  },
   methods: {
-    async fetchData () {
-      try {
-        const data = await this.$axios.get('https://demoapi.thedenstore.com/api/service?Request=Stores&Language=en-us')
-        this.stores = data.data
-      } catch (error) {
-        console.error(error)
-      }
-    },
+    ...mapActions({
+      fetchData: 'stores/fetchData'
+    }),
     openModal (store) {
       this.$q.dialog({
         title: store.name,
@@ -52,8 +49,8 @@ export default {
   align-items: flex-start;
   flex-wrap: wrap;
   width: 100%;
-  min-height: calc(100vh - 50px);
   height: 100%;
+  min-height: calc(100vh - 50px);
   background-color: $dark;
 
   &__item {
