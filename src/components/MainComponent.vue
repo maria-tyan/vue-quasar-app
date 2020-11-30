@@ -1,6 +1,10 @@
 <template>
-  <div>
-    <div class="" v-for="store in stores" :key="store.code">
+  <div class="stores-block">
+    <div
+      v-for="store in stores"
+      :key="store.code"
+      class="stores-block__item"
+    >
       {{ store.name }}
     </div>
   </div>
@@ -28,3 +32,31 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.stores-block {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  min-height: calc(100vh - 50px);
+  height: 100%;
+  background-color: $dark;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    width: 200px;
+    height: 200px;
+    margin: 20px 10px;
+    padding: 20px;
+    background-color: $negative;
+  }
+}
+</style>
