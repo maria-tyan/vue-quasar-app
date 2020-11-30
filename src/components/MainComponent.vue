@@ -66,6 +66,7 @@ export default {
     margin: 20px 10px;
     padding: 20px;
     background-color: $negative;
+    cursor: pointer;
   }
 }
 </style>
